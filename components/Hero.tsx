@@ -1,37 +1,97 @@
 import Link from 'next/link'
 import React from 'react'
+import { Sparkles, Star } from 'lucide-react'
 
 const Hero = () => {
     return (
-        <section className="relative w-full max-w-7xl mx-auto  py-4">
-            <div className="relative h-100 rounded-3xl overflow-hidden shadow-2xl">
-                <div className="absolute inset-0">
-                    <img 
-                        src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=1200&q=80" 
-                        alt="Luxury jewelry showcase"
-                        className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent"></div>
+        <section className="relative w-full max-w-7xl mx-auto px-6 py-12 md:py-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                {/* Left Content */}
+                <div className="space-y-8">
+                    <div>
+                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold text-[#2d2d2d] leading-tight mb-6" style={{fontFamily: 'var(--font-playfair)'}}>
+                            Jewelry For<br />
+                            Exclusive<br />
+                            Collections
+                        </h1>
+                        <p className="text-[#5a5a5a] text-base md:text-lg leading-relaxed max-w-md">
+                            Surrounding the gem, delicate filigree work crafted with meticulous attention, creating an heirloom worthy of generations.
+                        </p>
+                    </div>
+                    
+                    <Link 
+                        href="/products"
+                        className="inline-block bg-[#2d2d2d] text-white px-10 py-4 font-medium hover:bg-[#d4af37] transition-all duration-300 shadow-lg hover:shadow-xl"
+                    >
+                        Explore Now
+                    </Link>
+
+                    {/* Testimonial */}
+                    <div className="flex items-center gap-4 pt-8">
+                        <div className="w-16 h-16 rounded-full overflow-hidden border-4 border-white shadow-lg">
+                            <img 
+                                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80"
+                                alt="Customer"
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
+                        <div>
+                            <p className="text-[#2d2d2d] text-sm italic mb-1">
+                                "Absolutely breathtaking! I couldn't be happier with my purchase."
+                            </p>
+                            <p className="text-[#5a5a5a] text-sm font-medium">— Maria Sarapova</p>
+                        </div>
+                    </div>
                 </div>
 
-                {/* Hero Content */}
-                <div className="relative h-full flex flex-col justify-center px-12 md:px-20">
-                    <div className="max-w-2xl">
-                        <p className="text-[#d4af37] text-sm md:text-base uppercase tracking-[0.3em] mb-4 font-light">
-                            Timeless Elegance
-                        </p>
-                        <h2 className="text-white text-5xl md:text-7xl font-semibold mb-6 leading-tight" style={{fontFamily: 'var(--font-playfair)'}}>
-                            Golden Piece
-                        </h2>
-                        <p className="text-white/90 text-lg md:text-xl mb-8 font-light tracking-wide">
-                            Jewellery Store
-                        </p>
-                        <Link 
-                            href="/products"
-                            className="inline-block bg-white text-[#555d71] px-10 py-4 rounded-full font-medium hover:bg-[#d4af37] hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-                        >
-                            Explore Collection
-                        </Link>
+                {/* Right Images Section */}
+                <div className="relative h-[500px] lg:h-[600px]">
+                    {/* Decorative Star Top */}
+                    <div className="absolute top-0 right-20 text-[#d4af37] opacity-60">
+                        <Sparkles size={40} />
+                    </div>
+
+                    {/* Main Circle Image */}
+                    <div className="absolute top-0 right-0 w-[280px] h-[280px] md:w-[340px] md:h-[340px] rounded-full overflow-hidden border-8 border-white shadow-2xl z-10">
+                        <img 
+                            src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&q=80"
+                            alt="Elegant jewelry model"
+                            className="w-full h-full object-cover"
+                        />
+                    </div>
+
+                    {/* Products Badge */}
+                    <div className="absolute top-[140px] right-[120px] md:right-[140px] bg-[#2d2d2d] text-white px-6 py-3 rounded-full shadow-xl z-20">
+                        <p className="text-2xl font-bold">10000+</p>
+                        <p className="text-xs">Products</p>
+                    </div>
+
+                    {/* Bottom Circle Image */}
+                    <div className="absolute bottom-20 left-0 w-[240px] h-[240px] md:w-[280px] md:h-[280px] rounded-full overflow-hidden border-8 border-white shadow-2xl">
+                        <img 
+                            src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=400&q=80"
+                            alt="Luxury jewelry showcase"
+                            className="w-full h-full object-cover"
+                        />
+                    </div>
+
+                    {/* Happy Customer Badge */}
+                    <div className="absolute bottom-0 right-16 bg-white px-6 py-4 rounded-2xl shadow-xl">
+                        <p className="text-2xl font-bold text-[#2d2d2d]">25,000+</p>
+                        <div className="flex items-center gap-2 mt-2">
+                            <div className="flex -space-x-2">
+                                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 border-2 border-white"></div>
+                                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 border-2 border-white"></div>
+                                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 border-2 border-white"></div>
+                                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-white"></div>
+                            </div>
+                            <p className="text-xs text-[#5a5a5a]">Happy Customer</p>
+                        </div>
+                    </div>
+
+                    {/* Decorative Star Bottom */}
+                    <div className="absolute bottom-32 right-0 text-[#d4af37] opacity-60">
+                        <Sparkles size={32} />
                     </div>
                 </div>
             </div>
