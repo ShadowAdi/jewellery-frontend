@@ -1,12 +1,10 @@
 import Link from 'next/link'
-import React from 'react'
-import { Sparkles, Star } from 'lucide-react'
+import { Sparkles } from 'lucide-react'
 
 const Hero = () => {
     return (
         <section className="relative w-full max-w-7xl mx-auto px-6 py-12 md:py-20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                {/* Left Content */}
                 <div className="space-y-8">
                     <div>
                         <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold text-[#2d2d2d] leading-tight mb-6" style={{fontFamily: 'var(--font-playfair)'}}>
@@ -44,15 +42,12 @@ const Hero = () => {
                     </div>
                 </div>
 
-                {/* Right Images Section */}
-                <div className="relative h-[500px] lg:h-[600px]">
-                    {/* Decorative Star Top */}
+                <div className="relative h-125 lg:h-150">
                     <div className="absolute top-0 right-20 text-[#d4af37] opacity-60">
                         <Sparkles size={40} />
                     </div>
 
-                    {/* Main Circle Image */}
-                    <div className="absolute top-0 right-0 w-[280px] h-[280px] md:w-[340px] md:h-[340px] rounded-full overflow-hidden border-8 border-white shadow-2xl z-10">
+                    <div className="absolute top-0 right-0 w-70 h-70 md:w-85 md:h-85 rounded-full overflow-hidden border-8 border-white shadow-2xl z-10">
                         <img 
                             src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&q=80"
                             alt="Elegant jewelry model"
@@ -60,14 +55,12 @@ const Hero = () => {
                         />
                     </div>
 
-                    {/* Products Badge */}
-                    <div className="absolute top-[140px] right-[120px] md:right-[140px] bg-[#2d2d2d] text-white px-6 py-3 rounded-full shadow-xl z-20">
+                    <div className="absolute top-40 right-50 md:right-60 bg-[#2d2d2d] text-white px-6 py-3 rounded-full shadow-xl z-20">
                         <p className="text-2xl font-bold">10000+</p>
                         <p className="text-xs">Products</p>
                     </div>
 
-                    {/* Bottom Circle Image */}
-                    <div className="absolute bottom-20 left-0 w-[240px] h-[240px] md:w-[280px] md:h-[280px] rounded-full overflow-hidden border-8 border-white shadow-2xl">
+                    <div className="absolute bottom-20 left-0 w-60 h-60 md:w-70 md:h-70 rounded-full overflow-hidden border-8 border-white shadow-2xl">
                         <img 
                             src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=400&q=80"
                             alt="Luxury jewelry showcase"
@@ -75,7 +68,6 @@ const Hero = () => {
                         />
                     </div>
 
-                    {/* Happy Customer Badge */}
                     <div className="absolute bottom-0 right-16 bg-white px-6 py-4 rounded-2xl shadow-xl">
                         <p className="text-2xl font-bold text-[#2d2d2d]">25,000+</p>
                         <div className="flex items-center gap-2 mt-2">
@@ -89,7 +81,6 @@ const Hero = () => {
                         </div>
                     </div>
 
-                    {/* Decorative Star Bottom */}
                     <div className="absolute bottom-32 right-0 text-[#d4af37] opacity-60">
                         <Sparkles size={32} />
                     </div>
