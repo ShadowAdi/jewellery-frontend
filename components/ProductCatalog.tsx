@@ -256,9 +256,17 @@ export default function ProductCatalog() {
                     <h2 className="text-3xl sm:text-4xl md:text-5xl text-[#2d2d2d] font-semibold mb-2 sm:mb-3 font-playfair">
                         Our Collection
                     </h2>
-                    <p className="text-[#5a5a5a] text-xs sm:text-sm">
+                    <p className="text-[#5a5a5a] text-xs sm:text-sm mb-4">
                         Discover timeless pieces crafted with precision
                     </p>
+                    <div className="flex gap-3 sm:gap-4">
+                        <Link 
+                            href="/explore"
+                            className="px-4 sm:px-6 py-2 sm:py-2.5 bg-[#2d2d2d] text-white text-sm sm:text-base font-medium rounded-lg hover:bg-[#3d3d3d] transition-colors"
+                        >
+                            Explore
+                        </Link>
+                    </div>
                 </div>
             </div>
 
