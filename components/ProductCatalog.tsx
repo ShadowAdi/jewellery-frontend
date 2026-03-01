@@ -209,7 +209,6 @@ export default function ProductCatalog() {
     return (
         <section className="w-full py-16 bg-[#fce2db]">
             <div className="max-w-7xl mx-auto px-6">
-                {/* Header - 30% width */}
                 <div className="mb-8" style={{ maxWidth: '30%', minWidth: '250px' }}>
                     <h2 
                         className="text-4xl md:text-5xl text-[#2d2d2d] font-semibold mb-3" 
@@ -223,7 +222,6 @@ export default function ProductCatalog() {
                 </div>
             </div>
 
-            {/* Product Swiper */}
             <div
                 className="w-full overflow-hidden relative"
                 style={{ height: `${dims.containerH}px` }}
@@ -237,7 +235,7 @@ export default function ProductCatalog() {
                         <div
                             key={product.id}
                             data-slide
-                            className="shrink-0 pointer-events-none relative group"
+                            className="shrink-0  relative group"
                             style={{
                                 width: `${dims.cardW}px`,
                                 height: `${dims.cardH}px`,
@@ -255,27 +253,39 @@ export default function ProductCatalog() {
                                 loading="lazy"
                             />
 
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                            <div 
+                                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                                style={{
+                                    background: 'rgba(255, 255, 255, 0.1)',
+                                    backdropFilter: 'blur(10px)',
+                                    WebkitBackdropFilter: 'blur(10px)',
+                                }}
+                            />
 
-                            <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                                <p className="text-white/80 text-sm uppercase tracking-wider mb-2">
-                                    {product.category}
-                                </p>
+                            <div 
+                                className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                                style={{
+                                    background: 'rgba(255, 255, 255, 0.15)',
+                                    backdropFilter: 'blur(20px)',
+                                    WebkitBackdropFilter: 'blur(20px)',
+                                    borderTop: '1px solid rgba(255, 255, 255, 0.2)',
+                                }}
+                            >
                                 <h3 
-                                    className="text-white text-2xl font-semibold mb-3" 
-                                    style={{fontFamily: 'var(--font-playfair)'}}
+                                    className="text-white text-2xl font-semibold mb-2" 
+                                    style={{
+                                        fontFamily: 'var(--font-playfair)',
+                                        textShadow: '0 2px 8px rgba(0,0,0,0.3)'
+                                    }}
                                 >
                                     {product.name}
                                 </h3>
-                                <p className="text-white text-xl font-bold mb-4">
+                                <p 
+                                    className="text-white text-xl font-bold"
+                                    style={{textShadow: '0 2px 8px rgba(0,0,0,0.3)'}}
+                                >
                                     {product.price}
                                 </p>
-                                <Link
-                                    href={`/products/${product.id}`}
-                                    className="inline-block bg-white text-[#2d2d2d] px-8 py-3 font-medium hover:bg-[#d4af37] hover:text-white transition-all duration-300 pointer-events-auto"
-                                >
-                                    Explore Now
-                                </Link>
                             </div>
                         </div>
                     ))}
