@@ -46,7 +46,6 @@ export default function Hero() {
                         <Sparkles size={28} className="lg:w-10 lg:h-10" />
                     </div>
 
-                    {/* Top right circle - main image */}
                     <div className="absolute top-0 right-0 w-[55%] aspect-square rounded-full overflow-hidden border-4 sm:border-6 md:border-8 border-white shadow-2xl z-10">
                         <img 
                             src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&q=80"
@@ -55,13 +54,11 @@ export default function Hero() {
                         />
                     </div>
 
-                    {/* Products badge */}
                     <div className="absolute top-[30%] right-[5%] sm:right-[10%] md:right-[15%] bg-[#2d2d2d] text-white px-3 py-2 sm:px-5 sm:py-2.5 rounded-full shadow-xl z-20">
                         <p className="text-base sm:text-xl md:text-2xl font-bold leading-none">10000+</p>
                         <p className="text-[9px] sm:text-[10px] md:text-xs mt-0.5">Products</p>
                     </div>
 
-                    {/* Bottom left circle */}
                     <div className="absolute bottom-0 left-0 w-[48%] aspect-square rounded-full overflow-hidden border-4 sm:border-6 md:border-8 border-white shadow-2xl z-10">
                         <img 
                             src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=400&q=80"
@@ -70,7 +67,6 @@ export default function Hero() {
                         />
                     </div>
 
-                    {/* Happy customers badge */}
                     <div className="absolute bottom-[5%] right-[8%] sm:right-[12%] bg-white px-3 py-2.5 sm:px-5 sm:py-3 md:px-6 md:py-4 rounded-xl sm:rounded-2xl shadow-xl z-20 max-w-[150px] sm:max-w-[180px]">
                         <p className="text-base sm:text-xl md:text-2xl font-bold text-[#2d2d2d] leading-none">25,000+</p>
                         <div className="flex items-center gap-1.5 sm:gap-2 mt-2">
@@ -84,7 +80,6 @@ export default function Hero() {
                         </div>
                     </div>
 
-                    {/* Bottom sparkle */}
                     <div className="hidden md:block absolute bottom-[20%] right-0 text-[#d4af37] opacity-60 z-30">
                         <Sparkles size={20} className="lg:w-7 lg:h-7" />
                     </div>

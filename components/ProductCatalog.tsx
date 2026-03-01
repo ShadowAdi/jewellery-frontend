@@ -67,8 +67,6 @@ export default function ProductCatalog() {
     const [dims, setDims] = useState({ containerH: 520, cardH: 480, cardW: 340 })
     const [mousePos, setMousePos] = useState({ x: 50, y: 50 })
     const [isHovering, setIsHovering] = useState(false)
-
-    // Use a ref so the click handler always reads the latest value synchronously
     const didDragRef = useRef(false)
 
     const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -129,7 +127,6 @@ export default function ProductCatalog() {
         let dragStartX = 0
 
         const LERP = 0.06
-        // Minimum pixels moved before we consider it a drag (not a tap/click)
         const DRAG_THRESHOLD = 8
         const MOMENTUM_MULT = 12
         const MOMENTUM_DECAY = 0.95
@@ -192,7 +189,6 @@ export default function ProductCatalog() {
             prevTime = performance.now()
             velocity = 0
             momentum = 0
-            // Always reset drag flag on every new press
             didDragRef.current = false
             wrapper.setPointerCapture(e.pointerId)
         }
@@ -202,7 +198,6 @@ export default function ProductCatalog() {
             const dx = e.clientX - startX
             const totalDragDistance = Math.abs(e.clientX - dragStartX)
 
-            // Mark as a real drag once threshold is exceeded
             if (totalDragDistance > DRAG_THRESHOLD) {
                 didDragRef.current = true
             }
