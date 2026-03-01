@@ -1,13 +1,13 @@
 import Link from 'next/link'
 import { Sparkles } from 'lucide-react'
 
-const Hero = () => {
+export default function Hero() {
     return (
         <section className="relative w-full max-w-7xl mx-auto px-6 py-12 md:py-20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div className="space-y-8">
                     <div>
-                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold text-[#2d2d2d] leading-tight mb-6" style={{fontFamily: 'var(--font-playfair)'}}>
+                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold text-[#2d2d2d] leading-tight mb-6 font-playfair">
                             Jewelry For<br />
                             Exclusive<br />
                             Collections
@@ -71,10 +71,10 @@ const Hero = () => {
                         <p className="text-2xl font-bold text-[#2d2d2d]">25,000+</p>
                         <div className="flex items-center gap-2 mt-2">
                             <div className="flex -space-x-2">
-                                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 border-2 border-white"></div>
-                                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 border-2 border-white"></div>
-                                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 border-2 border-white"></div>
-                                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-white"></div>
+                                <div className="w-6 h-6 rounded-full bg-linear-to-br from-pink-400 to-pink-600 border-2 border-white"></div>
+                                <div className="w-6 h-6 rounded-full bg-linear-to-br from-yellow-400 to-yellow-600 border-2 border-white"></div>
+                                <div className="w-6 h-6 rounded-full bg-linear-to-br from-purple-400 to-purple-600 border-2 border-white"></div>
+                                <div className="w-6 h-6 rounded-full bg-linear-to-br from-blue-400 to-blue-600 border-2 border-white"></div>
                             </div>
                             <p className="text-xs text-[#5a5a5a]">Happy Customer</p>
                         </div>
@@ -88,5 +88,3 @@ const Hero = () => {
         </section>
     )
 }
-
-export default Hero
