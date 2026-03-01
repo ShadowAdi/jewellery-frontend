@@ -89,10 +89,16 @@ export default function ProductCatalog() {
         const update = () => {
             const vw = window.innerWidth
             const vh = window.innerHeight
-            if (vw < 480) {
-                setDims({ containerH: Math.min(420, vh * 0.65), cardH: Math.min(380, vh * 0.58), cardW: Math.min(280, vw * 0.85) })
+            if (vw < 380) {
+                setDims({ containerH: Math.min(360, vh * 0.6), cardH: Math.min(320, vh * 0.52), cardW: Math.min(240, vw * 0.82) })
+            } else if (vw < 480) {
+                setDims({ containerH: Math.min(400, vh * 0.62), cardH: Math.min(360, vh * 0.55), cardW: Math.min(260, vw * 0.80) })
+            } else if (vw < 640) {
+                setDims({ containerH: Math.min(440, vh * 0.65), cardH: Math.min(400, vh * 0.58), cardW: Math.min(280, vw * 0.75) })
             } else if (vw < 768) {
-                setDims({ containerH: Math.min(480, vh * 0.72), cardH: Math.min(440, vh * 0.65), cardW: Math.min(320, vw * 0.80) })
+                setDims({ containerH: Math.min(480, vh * 0.68), cardH: Math.min(440, vh * 0.62), cardW: Math.min(300, vw * 0.70) })
+            } else if (vw < 1024) {
+                setDims({ containerH: 500, cardH: 460, cardW: 320 })
             } else {
                 setDims({ containerH: 520, cardH: 480, cardW: 340 })
             }
@@ -239,29 +245,26 @@ export default function ProductCatalog() {
     }, [products, dims])
 
     return (
-        <section className="w-full py-16 bg-[#fce2db]">
-            <div className="max-w-7xl mx-auto px-6">
-                <div className="mb-8" style={{ maxWidth: '30%', minWidth: '250px' }}>
-                    <h2 
-                        className="text-4xl md:text-5xl text-[#2d2d2d] font-semibold mb-3" 
-                        style={{fontFamily: 'var(--font-playfair)'}}
-                    >
+        <section className="w-full py-8 sm:py-12 md:py-16 bg-[#fce2db]">
+            <div className="max-w-7xl mx-auto px-6 sm:px-6">
+                <div className="mb-6 sm:mb-8">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl text-[#2d2d2d] font-semibold mb-2 sm:mb-3 font-playfair">
                         Our Collection
                     </h2>
-                    <p className="text-[#5a5a5a] text-sm">
+                    <p className="text-[#5a5a5a] text-xs sm:text-sm">
                         Discover timeless pieces crafted with precision
                     </p>
                 </div>
             </div>
 
             <div
-                className="w-full overflow-hidden relative"
+                className="w-full overflow-hidden relative pl-6 m:pl-0"
                 style={{ height: `${dims.containerH}px` }}
             >
                 <div
                     ref={wrapperRef}
                     className="flex h-full items-center cursor-grab active:cursor-grabbing"
-                    style={{ willChange: 'transform', paddingLeft: '4vw' }}
+                    style={{ willChange: 'transform', paddingLeft: 'max(16px, 4vw)' }}
                 >
                     {products.map((product) => (
                         <div
@@ -295,7 +298,7 @@ export default function ProductCatalog() {
                             />
 
                             <div 
-                                className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                                className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                                 style={{
                                     background: 'rgba(255, 255, 255, 0.15)',
                                     backdropFilter: 'blur(20px)',
@@ -304,16 +307,15 @@ export default function ProductCatalog() {
                                 }}
                             >
                                 <h3 
-                                    className="text-white text-2xl font-semibold mb-2" 
+                                    className="text-white text-lg sm:text-xl md:text-2xl font-semibold mb-1 sm:mb-2 font-playfair" 
                                     style={{
-                                        fontFamily: 'var(--font-playfair)',
                                         textShadow: '0 2px 8px rgba(0,0,0,0.3)'
                                     }}
                                 >
                                     {product.name}
                                 </h3>
                                 <p 
-                                    className="text-white text-xl font-bold"
+                                    className="text-white text-base sm:text-lg md:text-xl font-bold"
                                     style={{textShadow: '0 2px 8px rgba(0,0,0,0.3)'}}
                                 >
                                     {product.price}
@@ -365,34 +367,33 @@ export default function ProductCatalog() {
                             }}
                         />
 
-                        <div className="relative w-full h-full flex flex-col items-center justify-center p-8 gap-8 z-10">
-                            <div className="w-24 h-24 rounded-full border-3 transition-all duration-500 flex items-center justify-center"
+                        <div className="relative w-full h-full flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 gap-4 sm:gap-6 md:gap-8 z-10">
+                            <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full border-3 transition-all duration-500 flex items-center justify-center"
                                 style={{
                                     borderColor: isHovering ? '#ffffff' : '#d4af37',
                                     borderWidth: '3px',
                                 }}
                             >
                                 <svg 
-                                    width="40" 
-                                    height="40" 
+                                    width="32" 
+                                    height="32" 
                                     viewBox="0 0 24 24" 
                                     fill="none" 
                                     stroke={isHovering ? '#ffffff' : '#d4af37'}
                                     strokeWidth="2" 
                                     strokeLinecap="round" 
                                     strokeLinejoin="round"
-                                    className="transition-colors duration-500"
+                                    className="transition-colors duration-500 sm:w-10 sm:h-10"
                                 >
                                     <path d="M5 12h14" />
                                     <path d="m12 5 7 7-7 7" />
                                 </svg>
                             </div>
 
-                            <div className="text-center space-y-4 relative z-20">
+                            <div className="text-center space-y-2 sm:space-y-3 md:space-y-4 relative z-20">
                                 <h3 
-                                    className="text-3xl font-bold transition-colors duration-500"
+                                    className="text-xl sm:text-2xl md:text-3xl font-bold transition-colors duration-500 font-playfair"
                                     style={{
-                                        fontFamily: 'var(--font-playfair)',
                                         color: isHovering ? '#ffffff' : '#2d2d2d',
                                         letterSpacing: '0.5px'
                                     }}
@@ -400,7 +401,7 @@ export default function ProductCatalog() {
                                     Explore More
                                 </h3>
                                 <p 
-                                    className="text-base font-medium transition-colors duration-500 max-w-xs"
+                                    className="text-xs sm:text-sm md:text-base font-medium transition-colors duration-500 max-w-xs px-2"
                                     style={{
                                         color: isHovering ? 'rgba(255, 255, 255, 0.9)' : '#5a5a5a',
                                         lineHeight: '1.6'
@@ -411,15 +412,15 @@ export default function ProductCatalog() {
                             </div>
 
                             <div 
-                                className="flex items-center gap-3 px-6 py-3 rounded-full border-2 transition-all duration-500 font-semibold text-sm tracking-wide z-50"
+                                className="flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 rounded-full border-2 transition-all duration-500 font-semibold text-xs sm:text-sm tracking-wide z-50"
                                 style={{
                                     borderColor: isHovering ? '#ffffff' : '#2d2d2d',
                                     color: isHovering ? '#ffffff' : '#2d2d2d',
                                     background: isHovering ? 'rgba(255, 255, 255, 0.1)' : 'transparent'
                                 }}
                             >
-                                <span>View All Products</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <span className="whitespace-nowrap">View All Products</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="sm:w-4 sm:h-4">
                                     <path d="m9 18 6-6-6-6" />
                                 </svg>
                             </div>
@@ -428,7 +429,7 @@ export default function ProductCatalog() {
                 </div>
 
                 <div
-                    className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium select-none pointer-events-none"
+                    className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-medium select-none pointer-events-none"
                     style={{
                         background: 'rgba(0,0,0,0.05)',
                         color: 'rgba(0,0,0,0.4)',
@@ -436,11 +437,12 @@ export default function ProductCatalog() {
                         whiteSpace: 'nowrap',
                     }}
                 >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="sm:w-3.5 sm:h-3.5">
                         <path d="M5 12h14" /><path d="m12 5-7 7 7 7" />
                     </svg>
-                    <span>Drag to explore</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <span className="hidden xs:inline sm:inline">Drag to explore</span>
+                    <span className="xs:hidden sm:hidden">Swipe</span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="sm:w-3.5 sm:h-3.5">
                         <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
                     </svg>
                 </div>
