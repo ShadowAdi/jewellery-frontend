@@ -67,12 +67,21 @@ export default function ProductCatalog() {
     const [dims, setDims] = useState({ containerH: 520, cardH: 480, cardW: 340 })
     const [mousePos, setMousePos] = useState({ x: 50, y: 50 })
     const [isHovering, setIsHovering] = useState(false)
+    const [isDragging, setIsDragging] = useState(false)
+    const dragStartPos = useRef({ x: 0, y: 0 })
 
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
         const rect = e.currentTarget.getBoundingClientRect()
         const x = ((e.clientX - rect.left) / rect.width) * 100
         const y = ((e.clientY - rect.top) / rect.height) * 100
         setMousePos({ x, y })
+    }
+
+    const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        if (isDragging) {
+            e.preventDefault()
+            e.stopPropagation()
+        }
     }
 
     useEffect(() => {
@@ -171,12 +180,17 @@ export default function ProductCatalog() {
             prevTime = performance.now()
             velocity = 0
             momentum = 0
+            dragStartPos.current = { x: e.clientX, y: e.clientY }
             wrapper.setPointerCapture(e.pointerId)
         }
 
         const onMove = (e: PointerEvent) => {
             if (!isDragging) return
             const dx = e.clientX - startX
+            const dragDistance = Math.abs(e.clientX - dragStartPos.current.x)
+            if (dragDistance > 5) {
+                setIsDragging(true)
+            }
             target = clamp(startScroll + dx, getMaxScroll(), 0)
             current = target
             const now = performance.now()
@@ -190,6 +204,7 @@ export default function ProductCatalog() {
             if (!isDragging) return
             isDragging = false
             momentum = velocity * MOMENTUM_MULT
+            setTimeout(() => setIsDragging(false), 100)
         }
 
         wrapper.addEventListener('pointerdown', onDown)
@@ -299,10 +314,10 @@ export default function ProductCatalog() {
                         </div>
                     ))}
 
-                    {/* Custom Explore More Card */}
-                    <div
+                    <Link
+                        href="/explore"
                         data-slide
-                        className="shrink-0 relative overflow-hidden cursor-pointer"
+                        className="shrink-0 relative overflow-hidden cursor-pointer block"
                         style={{
                             width: `${dims.cardW}px`,
                             height: `${dims.cardH}px`,
@@ -315,6 +330,7 @@ export default function ProductCatalog() {
                         onMouseMove={handleMouseMove}
                         onMouseEnter={() => setIsHovering(true)}
                         onMouseLeave={() => setIsHovering(false)}
+                        onClick={handleLinkClick}
                     >
 
                         <div 
@@ -332,7 +348,6 @@ export default function ProductCatalog() {
                             }}
                         />
 
-                        {/* White overlay that fades in when leaving */}
                         <div 
                             className="absolute inset-0 pointer-events-none transition-opacity duration-600"
                             style={{
@@ -400,7 +415,7 @@ export default function ProductCatalog() {
                                 </svg>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 </div>
 
                 <div

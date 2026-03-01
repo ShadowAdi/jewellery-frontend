@@ -18,13 +18,12 @@ const Hero = () => {
                     </div>
                     
                     <Link 
-                        href="/products"
+                        href="/explore"
                         className="inline-block bg-[#2d2d2d] text-white px-10 py-4 font-medium hover:bg-[#d4af37] transition-all duration-300 shadow-lg hover:shadow-xl"
                     >
                         Explore Now
                     </Link>
 
-                    {/* Testimonial */}
                     <div className="flex items-center gap-4 pt-8">
                         <div className="w-16 h-16 rounded-full overflow-hidden border-4 border-white shadow-lg">
                             <img 
