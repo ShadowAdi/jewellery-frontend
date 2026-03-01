@@ -65,6 +65,15 @@ const products = [
 export default function ProductCatalog() {
     const wrapperRef = useRef<HTMLDivElement>(null)
     const [dims, setDims] = useState({ containerH: 520, cardH: 480, cardW: 340 })
+    const [mousePos, setMousePos] = useState({ x: 50, y: 50 })
+    const [isHovering, setIsHovering] = useState(false)
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect()
+        const x = ((e.clientX - rect.left) / rect.width) * 100
+        const y = ((e.clientY - rect.top) / rect.height) * 100
+        setMousePos({ x, y })
+    }
 
     useEffect(() => {
         const update = () => {
@@ -289,6 +298,109 @@ export default function ProductCatalog() {
                             </div>
                         </div>
                     ))}
+
+                    {/* Custom Explore More Card */}
+                    <div
+                        data-slide
+                        className="shrink-0 relative overflow-hidden cursor-pointer"
+                        style={{
+                            width: `${dims.cardW}px`,
+                            height: `${dims.cardH}px`,
+                            marginRight: '3vw',
+                            borderRadius: '1.5rem',
+                            boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
+                            background: 'linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%)',
+                            border: '2px solid #e5e5e5',
+                        }}
+                        onMouseMove={handleMouseMove}
+                        onMouseEnter={() => setIsHovering(true)}
+                        onMouseLeave={() => setIsHovering(false)}
+                    >
+
+                        <div 
+                            className="absolute rounded-full pointer-events-none"
+                            style={{
+                                width: isHovering ? '200%' : '0%',
+                                height: isHovering ? '200%' : '0%',
+                                background: '#d4af37',
+                                left: isHovering ? `${mousePos.x}%` : '50%',
+                                top: isHovering ? `${mousePos.y}%` : '50%',
+                                transform: 'translate(-50%, -50%)',
+                                transition: isHovering 
+                                    ? 'width 0.7s ease-out, height 0.7s ease-out' 
+                                    : 'width 0.6s ease-in, height 0.6s ease-in, left 0s 0.6s, top 0s 0.6s',
+                            }}
+                        />
+
+                        {/* White overlay that fades in when leaving */}
+                        <div 
+                            className="absolute inset-0 pointer-events-none transition-opacity duration-600"
+                            style={{
+                                background: 'linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%)',
+                                opacity: isHovering ? 0 : 1,
+                            }}
+                        />
+
+                        <div className="relative w-full h-full flex flex-col items-center justify-center p-8 gap-8 z-10">
+                            <div className="w-24 h-24 rounded-full border-3 transition-all duration-500 flex items-center justify-center"
+                                style={{
+                                    borderColor: isHovering ? '#ffffff' : '#d4af37',
+                                    borderWidth: '3px',
+                                }}
+                            >
+                                <svg 
+                                    width="40" 
+                                    height="40" 
+                                    viewBox="0 0 24 24" 
+                                    fill="none" 
+                                    stroke={isHovering ? '#ffffff' : '#d4af37'}
+                                    strokeWidth="2" 
+                                    strokeLinecap="round" 
+                                    strokeLinejoin="round"
+                                    className="transition-colors duration-500"
+                                >
+                                    <path d="M5 12h14" />
+                                    <path d="m12 5 7 7-7 7" />
+                                </svg>
+                            </div>
+
+                            <div className="text-center space-y-4 relative z-20">
+                                <h3 
+                                    className="text-3xl font-bold transition-colors duration-500"
+                                    style={{
+                                        fontFamily: 'var(--font-playfair)',
+                                        color: isHovering ? '#ffffff' : '#2d2d2d',
+                                        letterSpacing: '0.5px'
+                                    }}
+                                >
+                                    Explore More
+                                </h3>
+                                <p 
+                                    className="text-base font-medium transition-colors duration-500 max-w-xs"
+                                    style={{
+                                        color: isHovering ? 'rgba(255, 255, 255, 0.9)' : '#5a5a5a',
+                                        lineHeight: '1.6'
+                                    }}
+                                >
+                                    Discover our complete collection of handcrafted jewelry
+                                </p>
+                            </div>
+
+                            <div 
+                                className="flex items-center gap-3 px-6 py-3 rounded-full border-2 transition-all duration-500 font-semibold text-sm tracking-wide"
+                                style={{
+                                    borderColor: isHovering ? '#ffffff' : '#2d2d2d',
+                                    color: isHovering ? '#ffffff' : '#2d2d2d',
+                                    background: isHovering ? 'rgba(255, 255, 255, 0.1)' : 'transparent'
+                                }}
+                            >
+                                <span>View All Products</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div
