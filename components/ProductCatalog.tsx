@@ -68,6 +68,7 @@ export default function ProductCatalog() {
     const [mousePos, setMousePos] = useState({ x: 50, y: 50 })
     const [isHovering, setIsHovering] = useState(false)
 
+    // Use a ref so the click handler always reads the latest value synchronously
     const didDragRef = useRef(false)
 
     const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -128,7 +129,8 @@ export default function ProductCatalog() {
         let dragStartX = 0
 
         const LERP = 0.06
-        const DRAG_THRESHOLD = 8  // px — must move this much to count as a drag
+        // Minimum pixels moved before we consider it a drag (not a tap/click)
+        const DRAG_THRESHOLD = 8
         const MOMENTUM_MULT = 12
         const MOMENTUM_DECAY = 0.95
 
@@ -190,7 +192,7 @@ export default function ProductCatalog() {
             prevTime = performance.now()
             velocity = 0
             momentum = 0
-            // Reset drag flag on every new press
+            // Always reset drag flag on every new press
             didDragRef.current = false
             wrapper.setPointerCapture(e.pointerId)
         }
@@ -200,7 +202,7 @@ export default function ProductCatalog() {
             const dx = e.clientX - startX
             const totalDragDistance = Math.abs(e.clientX - dragStartX)
 
-            // Mark as a real drag only once threshold is exceeded
+            // Mark as a real drag once threshold is exceeded
             if (totalDragDistance > DRAG_THRESHOLD) {
                 didDragRef.current = true
             }
@@ -218,7 +220,13 @@ export default function ProductCatalog() {
             if (!isDragging) return
             isDragging = false
             momentum = velocity * MOMENTUM_MULT
-            setTimeout(() => { didDragRef.current = false }, 10)
+
+            // FIX: Keep the drag flag alive long enough for the subsequent
+            // click event to read it (click fires ~50–100ms after pointerup).
+            // 150ms is imperceptible to users but safely bridges the gap.
+            setTimeout(() => {
+                didDragRef.current = false
+            }, 150)
         }
 
         wrapper.addEventListener('pointerdown', onDown)
@@ -280,7 +288,7 @@ export default function ProductCatalog() {
                                 boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
                             }}
                         >
-                            <img 
+                            <img
                                 src={product.image}
                                 alt={product.name}
                                 className="w-full h-full object-cover"
@@ -288,35 +296,35 @@ export default function ProductCatalog() {
                                 loading="lazy"
                             />
 
-                            <div 
+                            <div
                                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                                 style={{
                                     background: 'rgba(255, 255, 255, 0.1)',
                                     backdropFilter: 'blur(10px)',
                                     WebkitBackdropFilter: 'blur(10px)',
+                                    pointerEvents: 'none',
                                 }}
                             />
 
-                            <div 
+                            <div
                                 className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                                 style={{
                                     background: 'rgba(255, 255, 255, 0.15)',
                                     backdropFilter: 'blur(20px)',
                                     WebkitBackdropFilter: 'blur(20px)',
                                     borderTop: '1px solid rgba(255, 255, 255, 0.2)',
+                                    pointerEvents: 'none',
                                 }}
                             >
-                                <h3 
-                                    className="text-white text-lg sm:text-xl md:text-2xl font-semibold mb-1 sm:mb-2 font-playfair" 
-                                    style={{
-                                        textShadow: '0 2px 8px rgba(0,0,0,0.3)'
-                                    }}
+                                <h3
+                                    className="text-white text-lg sm:text-xl md:text-2xl font-semibold mb-1 sm:mb-2 font-playfair"
+                                    style={{ textShadow: '0 2px 8px rgba(0,0,0,0.3)' }}
                                 >
                                     {product.name}
                                 </h3>
-                                <p 
+                                <p
                                     className="text-white text-base sm:text-lg md:text-xl font-bold"
-                                    style={{textShadow: '0 2px 8px rgba(0,0,0,0.3)'}}
+                                    style={{ textShadow: '0 2px 8px rgba(0,0,0,0.3)' }}
                                 >
                                     {product.price}
                                 </p>
@@ -324,108 +332,7 @@ export default function ProductCatalog() {
                         </div>
                     ))}
 
-                    <Link
-                        href="/explore"
-                        data-slide
-                        className="shrink-0 relative overflow-hidden block"
-                        style={{
-                            width: `${dims.cardW}px`,
-                            height: `${dims.cardH}px`,
-                            marginRight: '3vw',
-                            borderRadius: '1.5rem',
-                            boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
-                            background: 'linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%)',
-                            border: '2px solid #e5e5e5',
-                            cursor: 'pointer',
-                            pointerEvents: 'auto',
-                        }}
-                        onMouseMove={handleMouseMove}
-                        onMouseEnter={() => setIsHovering(true)}
-                        onMouseLeave={() => setIsHovering(false)}
-                        onClick={handleLinkClick}
-                    >
-                        <div 
-                            className="absolute rounded-full pointer-events-none"
-                            style={{
-                                width: isHovering ? '200%' : '0%',
-                                height: isHovering ? '200%' : '0%',
-                                background: '#d4af37',
-                                left: isHovering ? `${mousePos.x}%` : '50%',
-                                top: isHovering ? `${mousePos.y}%` : '50%',
-                                transform: 'translate(-50%, -50%)',
-                                transition: isHovering 
-                                    ? 'width 0.7s ease-out, height 0.7s ease-out' 
-                                    : 'width 0.6s ease-in, height 0.6s ease-in, left 0s 0.6s, top 0s 0.6s',
-                            }}
-                        />
 
-                        <div 
-                            className="absolute inset-0 pointer-events-none transition-opacity duration-600"
-                            style={{
-                                background: 'linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%)',
-                                opacity: isHovering ? 0 : 1,
-                            }}
-                        />
-
-                        <div className="relative w-full h-full flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 gap-4 sm:gap-6 md:gap-8 z-10">
-                            <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full border-3 transition-all duration-500 flex items-center justify-center"
-                                style={{
-                                    borderColor: isHovering ? '#ffffff' : '#d4af37',
-                                    borderWidth: '3px',
-                                }}
-                            >
-                                <svg 
-                                    width="32" 
-                                    height="32" 
-                                    viewBox="0 0 24 24" 
-                                    fill="none" 
-                                    stroke={isHovering ? '#ffffff' : '#d4af37'}
-                                    strokeWidth="2" 
-                                    strokeLinecap="round" 
-                                    strokeLinejoin="round"
-                                    className="transition-colors duration-500 sm:w-10 sm:h-10"
-                                >
-                                    <path d="M5 12h14" />
-                                    <path d="m12 5 7 7-7 7" />
-                                </svg>
-                            </div>
-
-                            <div className="text-center space-y-2 sm:space-y-3 md:space-y-4 relative z-20">
-                                <h3 
-                                    className="text-xl sm:text-2xl md:text-3xl font-bold transition-colors duration-500 font-playfair"
-                                    style={{
-                                        color: isHovering ? '#ffffff' : '#2d2d2d',
-                                        letterSpacing: '0.5px'
-                                    }}
-                                >
-                                    Explore More
-                                </h3>
-                                <p 
-                                    className="text-xs sm:text-sm md:text-base font-medium transition-colors duration-500 max-w-xs px-2"
-                                    style={{
-                                        color: isHovering ? 'rgba(255, 255, 255, 0.9)' : '#5a5a5a',
-                                        lineHeight: '1.6'
-                                    }}
-                                >
-                                    Discover our complete collection of handcrafted jewelry
-                                </p>
-                            </div>
-
-                            <div 
-                                className="flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 rounded-full border-2 transition-all duration-500 font-semibold text-xs sm:text-sm tracking-wide z-50"
-                                style={{
-                                    borderColor: isHovering ? '#ffffff' : '#2d2d2d',
-                                    color: isHovering ? '#ffffff' : '#2d2d2d',
-                                    background: isHovering ? 'rgba(255, 255, 255, 0.1)' : 'transparent'
-                                }}
-                            >
-                                <span className="whitespace-nowrap">View All Products</span>
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="sm:w-4 sm:h-4">
-                                    <path d="m9 18 6-6-6-6" />
-                                </svg>
-                            </div>
-                        </div>
-                    </Link>
                 </div>
 
                 <div
