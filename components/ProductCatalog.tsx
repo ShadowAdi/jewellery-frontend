@@ -68,8 +68,6 @@ export default function ProductCatalog() {
     const [mousePos, setMousePos] = useState({ x: 50, y: 50 })
     const [isHovering, setIsHovering] = useState(false)
 
-    // Use a ref for drag detection so the click handler always reads the latest value
-    // synchronously — no async state lag.
     const didDragRef = useRef(false)
 
     const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {

@@ -55,7 +55,6 @@ export default function ProductPage() {
 
       <main className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-20">
-          {/* Product Images */}
           <div className="space-y-6">
             <div className="aspect-square w-full overflow-hidden rounded-2xl bg-gray-100">
               <img
@@ -66,7 +65,6 @@ export default function ProductPage() {
             </div>
           </div>
 
-          {/* Product Details */}
           <div className="space-y-8">
             <div>
               <p className="text-sm text-[#d4af37] font-medium mb-2 tracking-wider uppercase">
@@ -97,7 +95,6 @@ export default function ProductPage() {
               </p>
             </div>
 
-            {/* Product Specifications */}
             <div className="space-y-4">
               <h3 className="text-xl font-semibold text-[#2d2d2d] mb-4" style={{fontFamily: 'var(--font-playfair)'}}>
                 Specifications
