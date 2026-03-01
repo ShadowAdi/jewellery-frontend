@@ -5,7 +5,7 @@ export default function Hero() {
     return (
         <section className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-16 lg:py-20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                <div className="space-y-6 sm:space-y-8 order-2 lg:order-1 z-10">
+                <div className="space-y-6 sm:space-y-8 order-1 lg:order-1 z-10">
                     <div>
                         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-semibold text-[#2d2d2d] leading-[1.1] mb-4 sm:mb-6 font-playfair">
                             Jewelry For<br />
@@ -41,7 +41,7 @@ export default function Hero() {
                     </div>
                 </div>
 
-                <div className="relative w-full aspect-square max-w-[500px] mx-auto lg:max-w-none order-1 lg:order-2">
+                <div className="relative w-full aspect-square max-w-[500px] mx-auto lg:max-w-none order-2 lg:order-2">
                     <div className="hidden md:block absolute top-2 right-8 lg:right-12 text-[#d4af37] opacity-60 z-30">
                         <Sparkles size={28} className="lg:w-10 lg:h-10" />
                     </div>
