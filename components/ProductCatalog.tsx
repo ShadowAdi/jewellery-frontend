@@ -9,14 +9,14 @@ const products = [
         name: 'Diamond Earrings',
         price: '$850',
         category: 'Earrings',
-        image: 'https://images.unsplash.com/photo-1535556116002-6281ff3e9f99?w=400&q=80'
+        image: 'https://images.unsplash.com/photo-1617038220319-276d3cfab638?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
         id: 2,
         name: 'Gold Wedding Band',
         price: '$1,200',
         category: 'Rings',
-        image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400&q=80'
+        image: 'https://images.unsplash.com/photo-1611652022419-a9419f74343d?q=80&w=688&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
         id: 3,
@@ -30,35 +30,35 @@ const products = [
         name: 'Rose Gold Bracelet',
         price: '$950',
         category: 'Bracelets',
-        image: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&q=80'
+        image: 'https://images.unsplash.com/photo-1585960622850-ed33c41d6418?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
         id: 5,
         name: 'Sapphire Ring',
         price: '$1,850',
         category: 'Rings',
-        image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&q=80'
+        image: 'https://images.unsplash.com/photo-1590166223826-12dee1677420?q=80&w=689&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
         id: 6,
         name: 'Silver Chain Necklace',
         price: '$680',
         category: 'Necklaces',
-        image: 'https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=400&q=80'
+        image: 'https://images.unsplash.com/photo-1633934542430-0905ccb5f050?q=80&w=1025&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
         id: 7,
         name: 'Emerald Pendant',
         price: '$1,450',
         category: 'Necklaces',
-        image: 'https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?w=400&q=80'
+        image: 'https://images.unsplash.com/photo-1599458349289-18f0ee82e6ed?q=80&w=689&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
         id: 8,
         name: 'Platinum Cufflinks',
         price: '$780',
         category: 'Accessories',
-        image: 'https://images.unsplash.com/photo-1614694049050-7f370c34d74f?w=400&q=80'
+        image: 'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     }
 ]
 
@@ -247,7 +247,6 @@ export default function ProductCatalog() {
                                 boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
                             }}
                         >
-                            {/* Product Image */}
                             <img 
                                 src={product.image}
                                 alt={product.name}
@@ -256,10 +255,8 @@ export default function ProductCatalog() {
                                 loading="lazy"
                             />
 
-                            {/* Gradient Overlay */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                            {/* Content - Shows on Hover */}
                             <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
                                 <p className="text-white/80 text-sm uppercase tracking-wider mb-2">
                                     {product.category}
@@ -284,7 +281,6 @@ export default function ProductCatalog() {
                     ))}
                 </div>
 
-                {/* Drag hint */}
                 <div
                     className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium select-none pointer-events-none"
                     style={{
