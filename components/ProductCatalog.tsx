@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const products = [
     {
@@ -288,10 +289,11 @@ export default function ProductCatalog() {
                                 boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
                             }}
                         >
-                            <img
+                            <Image
                                 src={product.image}
                                 alt={product.name}
-                                className="w-full h-full object-cover"
+                                fill
+                                className="object-cover"
                                 draggable={false}
                                 loading="lazy"
                             />

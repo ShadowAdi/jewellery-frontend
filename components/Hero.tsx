@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Sparkles } from 'lucide-react'
 
 export default function Hero() {
@@ -26,9 +27,11 @@ export default function Hero() {
 
                     <div className="hidden sm:flex items-center gap-3 sm:gap-4 pt-4 sm:pt-6">
                         <div className="w-12 h-12 sm:w-14 sm:h-14 shrink-0 rounded-full overflow-hidden border-4 border-white shadow-lg">
-                            <img 
+                            <Image 
                                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80"
                                 alt="Customer"
+                                width={100}
+                                height={100}
                                 className="w-full h-full object-cover"
                             />
                         </div>
@@ -47,9 +50,11 @@ export default function Hero() {
                     </div>
 
                     <div className="absolute top-0 right-0 w-[55%] aspect-square rounded-full overflow-hidden border-4 sm:border-6 md:border-8 border-white shadow-2xl z-10">
-                        <img 
+                        <Image 
                             src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&q=80"
                             alt="Elegant jewelry model"
+                            width={400}
+                            height={400}
                             className="w-full h-full object-cover"
                         />
                     </div>
@@ -60,9 +65,11 @@ export default function Hero() {
                     </div>
 
                     <div className="absolute bottom-0 left-0 w-[48%] aspect-square rounded-full overflow-hidden border-4 sm:border-6 md:border-8 border-white shadow-2xl z-10">
-                        <img 
+                        <Image 
                             src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=400&q=80"
                             alt="Luxury jewelry showcase"
+                            width={400}
+                            height={400}
                             className="w-full h-full object-cover"
                         />
                     </div>

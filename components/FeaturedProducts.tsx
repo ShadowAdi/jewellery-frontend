@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 
 const featuredProducts = [
@@ -32,7 +33,7 @@ const featuredProducts = [
 
 export default function FeaturedProducts() {
     return (
-        <section className="w-full bg-gradient-to-b from-white to-[#faf8f5] py-16 sm:py-20 md:py-24">
+        <section className="w-full bg-linear-to-b from-white to-[#faf8f5] py-16 sm:py-20 md:py-24">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="text-center mb-12 sm:mb-16">
                     <p className="text-sm text-[#d4af37] font-medium mb-2 tracking-wider uppercase">
@@ -56,24 +57,22 @@ export default function FeaturedProducts() {
                                 gridColumn: index === 0 ? 'span 1' : 'span 1',
                             }}
                         >
-                            <div className="relative aspect-[4/5] overflow-hidden bg-gray-100">
-                                <img
+                            <div className="relative aspect-4/5 overflow-hidden bg-gray-100">
+                                <Image
                                     src={product.image}
                                     alt={product.name}
-                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                    fill
+                                    className="object-cover group-hover:scale-110 transition-transform duration-700"
                                 />
                                 
-                                {/* Badge */}
                                 <div className="absolute top-6 left-6">
                                     <span className="bg-[#2d2d2d] text-white px-4 py-2 text-xs font-medium tracking-wide rounded-full">
                                         {product.badge}
                                     </span>
                                 </div>
 
-                                {/* Gradient overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
+                                <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
 
-                                {/* Content */}
                                 <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 text-white transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                                     <p className="text-sm sm:text-base mb-2 opacity-90">
                                         {product.description}

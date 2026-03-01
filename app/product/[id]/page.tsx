@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import PageHeader from '@/components/ui/PageHeader'
 import ProductRating from '@/components/product/ProductRating'
 import ProductSpecifications from '@/components/product/ProductSpecifications'
@@ -78,11 +79,12 @@ export default function ProductPage() {
       <main className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-20">
           <div className="space-y-6">
-            <div className="aspect-square w-full overflow-hidden rounded-2xl bg-gray-100">
-              <img
+            <div className="aspect-square w-full overflow-hidden rounded-2xl bg-gray-100 relative">
+              <Image
                 src={product.image}
                 alt={product.name}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                fill
+                className="object-cover hover:scale-105 transition-transform duration-700"
               />
             </div>
           </div>

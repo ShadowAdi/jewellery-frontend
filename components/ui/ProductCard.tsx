@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 interface ProductCardProps {
   id: number
@@ -22,11 +23,12 @@ export default function ProductCard({
   if (variant === 'compact') {
     return (
       <Link href={`/product/${id}`} className="group">
-        <div className="aspect-square overflow-hidden rounded-xl bg-gray-100 mb-4">
-          <img
+        <div className="aspect-square overflow-hidden rounded-xl bg-gray-100 mb-4 relative">
+          <Image
             src={image}
             alt={name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-700"
           />
         </div>
         <p className="text-sm text-[#8a8a8a] mb-1">{category}</p>
@@ -43,10 +45,11 @@ export default function ProductCard({
   return (
     <Link href={`/product/${id}`} className="group">
       <div className="relative overflow-hidden rounded-2xl bg-gray-50 mb-4 aspect-[3/4]">
-        <img
+        <Image
           src={image}
           alt={name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-110"
         />
         
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
