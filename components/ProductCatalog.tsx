@@ -67,8 +67,10 @@ export default function ProductCatalog() {
     const [dims, setDims] = useState({ containerH: 520, cardH: 480, cardW: 340 })
     const [mousePos, setMousePos] = useState({ x: 50, y: 50 })
     const [isHovering, setIsHovering] = useState(false)
-    const [isDragging, setIsDragging] = useState(false)
-    const dragStartPos = useRef({ x: 0, y: 0 })
+
+    // Use a ref for drag detection so the click handler always reads the latest value
+    // synchronously — no async state lag.
+    const didDragRef = useRef(false)
 
     const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
         const rect = e.currentTarget.getBoundingClientRect()
@@ -78,9 +80,10 @@ export default function ProductCatalog() {
     }
 
     const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-        if (isDragging) {
+        if (didDragRef.current) {
             e.preventDefault()
             e.stopPropagation()
+            return false
         }
     }
 
@@ -118,8 +121,10 @@ export default function ProductCatalog() {
         let velocity = 0
         let momentum = 0
         let animId: number
+        let dragStartX = 0
 
         const LERP = 0.06
+        const DRAG_THRESHOLD = 8  // px — must move this much to count as a drag
         const MOMENTUM_MULT = 12
         const MOMENTUM_DECAY = 0.95
 
@@ -175,22 +180,27 @@ export default function ProductCatalog() {
         const onDown = (e: PointerEvent) => {
             isDragging = true
             startX = e.clientX
+            dragStartX = e.clientX
             startScroll = target
             prevX = e.clientX
             prevTime = performance.now()
             velocity = 0
             momentum = 0
-            dragStartPos.current = { x: e.clientX, y: e.clientY }
+            // Reset drag flag on every new press
+            didDragRef.current = false
             wrapper.setPointerCapture(e.pointerId)
         }
 
         const onMove = (e: PointerEvent) => {
             if (!isDragging) return
             const dx = e.clientX - startX
-            const dragDistance = Math.abs(e.clientX - dragStartPos.current.x)
-            if (dragDistance > 5) {
-                setIsDragging(true)
+            const totalDragDistance = Math.abs(e.clientX - dragStartX)
+
+            // Mark as a real drag only once threshold is exceeded
+            if (totalDragDistance > DRAG_THRESHOLD) {
+                didDragRef.current = true
             }
+
             target = clamp(startScroll + dx, getMaxScroll(), 0)
             current = target
             const now = performance.now()
@@ -204,7 +214,7 @@ export default function ProductCatalog() {
             if (!isDragging) return
             isDragging = false
             momentum = velocity * MOMENTUM_MULT
-            setTimeout(() => setIsDragging(false), 100)
+            setTimeout(() => { didDragRef.current = false }, 10)
         }
 
         wrapper.addEventListener('pointerdown', onDown)
@@ -255,11 +265,11 @@ export default function ProductCatalog() {
                     className="flex h-full items-center cursor-grab active:cursor-grabbing"
                     style={{ willChange: 'transform', paddingLeft: '4vw' }}
                 >
-                    {products.map((product, i) => (
+                    {products.map((product) => (
                         <div
                             key={product.id}
                             data-slide
-                            className="shrink-0  relative group"
+                            className="shrink-0 relative group"
                             style={{
                                 width: `${dims.cardW}px`,
                                 height: `${dims.cardH}px`,
@@ -317,7 +327,7 @@ export default function ProductCatalog() {
                     <Link
                         href="/explore"
                         data-slide
-                        className="shrink-0 relative overflow-hidden cursor-pointer block"
+                        className="shrink-0 relative overflow-hidden block"
                         style={{
                             width: `${dims.cardW}px`,
                             height: `${dims.cardH}px`,
@@ -326,13 +336,14 @@ export default function ProductCatalog() {
                             boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
                             background: 'linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%)',
                             border: '2px solid #e5e5e5',
+                            cursor: 'pointer',
+                            pointerEvents: 'auto',
                         }}
                         onMouseMove={handleMouseMove}
                         onMouseEnter={() => setIsHovering(true)}
                         onMouseLeave={() => setIsHovering(false)}
                         onClick={handleLinkClick}
                     >
-
                         <div 
                             className="absolute rounded-full pointer-events-none"
                             style={{
@@ -402,7 +413,7 @@ export default function ProductCatalog() {
                             </div>
 
                             <div 
-                                className="flex items-center gap-3 px-6 py-3 rounded-full border-2 transition-all duration-500 font-semibold text-sm tracking-wide"
+                                className="flex items-center gap-3 px-6 py-3 rounded-full border-2 transition-all duration-500 font-semibold text-sm tracking-wide z-50"
                                 style={{
                                     borderColor: isHovering ? '#ffffff' : '#2d2d2d',
                                     color: isHovering ? '#ffffff' : '#2d2d2d',
