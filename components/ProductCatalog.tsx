@@ -221,9 +221,6 @@ export default function ProductCatalog() {
             isDragging = false
             momentum = velocity * MOMENTUM_MULT
 
-            // FIX: Keep the drag flag alive long enough for the subsequent
-            // click event to read it (click fires ~50–100ms after pointerup).
-            // 150ms is imperceptible to users but safely bridges the gap.
             setTimeout(() => {
                 didDragRef.current = false
             }, 150)
